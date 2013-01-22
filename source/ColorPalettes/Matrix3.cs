@@ -40,12 +40,42 @@ namespace ColorPalettes
 
         public Matrix3 Transposed()
         {
-            return new Matrix3(new double[,]
+            return new Matrix3(new[,]
                 {
                     {this[0,0], this[1,0], this[2,0]},
                     {this[0,1], this[1,1], this[2,1]},
                     {this[0,2], this[1,2], this[2,2]}
                 });
+        }
+
+        protected bool Equals(Matrix3 other)
+        {
+            for (var i = 0; i < 3; i++)
+            {
+                for (var j = 0; j < 3; j++)
+                {
+                    var left = _matrix[i, j];
+                    var right = other._matrix[i, j];
+
+                    if (left != right)
+                        return false;
+                }
+            }
+
+            return true;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((Matrix3) obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return (_matrix != null ? _matrix.GetHashCode() : 0);
         }
     }
 }

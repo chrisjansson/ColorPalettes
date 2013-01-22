@@ -77,6 +77,46 @@ namespace Tests
             AssertMatricesAreEqual(expectedTranspose, transposed);
         }
 
+        [Test]
+        public void Are_equal_returns_false_for_matrices_that_are_not_equal()
+        {
+            var left = new Matrix3(new double[,]
+                {
+                    {1, 2, 3},
+                    {4, 5, 6},
+                    {7, 8, 9}
+                });
+
+            var right = new Matrix3(new double[,]
+                {
+                    {1, 4, 7},
+                    {2, 5, 8},
+                    {3, 6, 9}
+                });
+
+            left.Should().NotBe(right);
+        }
+
+        [Test]
+        public void Are_equal_returns_true_for_matrices_that_are_equal()
+        {
+            var left = new Matrix3(new double[,]
+                {
+                    {1, 2, 3},
+                    {4, 5, 6},
+                    {7, 8, 9}
+                });
+
+            var right = new Matrix3(new double[,]
+                {
+                    {1, 2, 3},
+                    {4, 5, 6},
+                    {7, 8, 9}
+                });
+
+            left.Should().Be(right);
+        }
+
         private void AssertMatricesAreEqual(Matrix3 expected, Matrix3 actual)
         {
             for (var i = 0; i < 3; i++)
