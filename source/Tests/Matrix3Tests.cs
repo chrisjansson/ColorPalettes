@@ -74,7 +74,7 @@ namespace Tests
 
             var transposed = matrix.Transposed();
 
-            AssertMatricesAreEqual(expectedTranspose, transposed);
+            transposed.Should().Be(expectedTranspose);
         }
 
         [Test]
@@ -117,16 +117,16 @@ namespace Tests
             left.Should().Be(right);
         }
 
-        private void AssertMatricesAreEqual(Matrix3 expected, Matrix3 actual)
-        {
-            for (var i = 0; i < 3; i++)
-            {
-                for (var j = 0; j < 3; j++)
-                {
-                    var expectedValue = expected[i, j];
-                    actual[i, j].Should().Be(expectedValue);
-                }
-            }
-        }
+        //private void AssertMatricesAreEqual(Matrix3 expected, Matrix3 actual)
+        //{
+        //    for (var i = 0; i < 3; i++)
+        //    {
+        //        for (var j = 0; j < 3; j++)
+        //        {
+        //            var expectedValue = expected[i, j];
+        //            actual[i, j].Should().Be(expectedValue);
+        //        }
+        //    }
+        //}
     }
 }
