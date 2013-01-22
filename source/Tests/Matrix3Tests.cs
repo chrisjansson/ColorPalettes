@@ -117,16 +117,17 @@ namespace Tests
             left.Should().Be(right);
         }
 
-        //private void AssertMatricesAreEqual(Matrix3 expected, Matrix3 actual)
-        //{
-        //    for (var i = 0; i < 3; i++)
-        //    {
-        //        for (var j = 0; j < 3; j++)
-        //        {
-        //            var expectedValue = expected[i, j];
-        //            actual[i, j].Should().Be(expectedValue);
-        //        }
-        //    }
-        //}
+        [Test]
+        public void Determinant_returns_correct_value()
+        {
+            var matrix = new Matrix3(new double[,]
+                {
+                    {1, 5, 3},
+                    {2, 10, 5},
+                    {3, 20, 2}
+                });
+
+            matrix.Determinant.Should().Be(5);
+        }
     }
 }
