@@ -38,6 +38,8 @@ namespace ColorPalettes
             return new Vector3(x, y, z);
         }
 
+        public double Determinant { get; private set; }
+
         public Matrix3 Transposed()
         {
             return new Matrix3(new[,]
