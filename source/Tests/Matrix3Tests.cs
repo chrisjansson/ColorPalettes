@@ -54,5 +54,39 @@ namespace Tests
                 act.ShouldThrow<Exception>();
             }
         }
+
+        [Test]
+        public void Transposes_matrix_correctly()
+        {
+            var matrix = new Matrix3(new double[,]
+                {
+                    {1, 2, 3},
+                    {4, 5, 6},
+                    {7, 8, 9}
+                });
+
+            var expectedTranspose = new Matrix3(new double[,]
+                {
+                    {1, 4, 7},
+                    {2, 5, 8},
+                    {3, 6, 9}
+                });
+
+            var transposed = matrix.Transposed();
+
+            AssertMatricesAreEqual(expectedTranspose, transposed);
+        }
+
+        private void AssertMatricesAreEqual(Matrix3 expected, Matrix3 actual)
+        {
+            for (var i = 0; i < 3; i++)
+            {
+                for (var j = 0; j < 3; j++)
+                {
+                    var expectedValue = expected[i, j];
+                    actual[i, j].Should().Be(expectedValue);
+                }
+            }
+        }
     }
 }

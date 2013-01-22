@@ -37,5 +37,15 @@ namespace ColorPalettes
 
             return new Vector3(x, y, z);
         }
+
+        public Matrix3 Transposed()
+        {
+            return new Matrix3(new double[,]
+                {
+                    {this[0,0], this[1,0], this[2,0]},
+                    {this[0,1], this[1,1], this[2,1]},
+                    {this[0,2], this[1,2], this[2,2]}
+                });
+        }
     }
 }
