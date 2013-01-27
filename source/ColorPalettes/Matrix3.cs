@@ -43,13 +43,13 @@ namespace ColorPalettes
 
         public static Matrix3 operator *(double scalar, Matrix3 matrix)
         {
-            var newMatrix = new double[3,3];
+            var newMatrix = new double[3, 3];
 
             for (var i = 0; i < 3; i++)
             {
                 for (var j = 0; j < 3; j++)
                 {
-                    newMatrix[i, j] = matrix._matrix[i, j]*scalar;
+                    newMatrix[i, j] = matrix._matrix[i, j] * scalar;
                 }
             }
 
@@ -106,6 +106,33 @@ namespace ColorPalettes
             var ceg = _matrix[0, 2] * _matrix[1, 1] * _matrix[2, 0];
 
             return aek + bfg + cdh - afh - bkd - ceg;
+        }
+
+        public Matrix3 Inverted()
+        {
+            var determinant = Determinant;
+
+            if (determinant == 0)
+                return null;
+
+            var a = _matrix[0, 0];
+            var b = _matrix[0, 1];
+            var c = _matrix[0, 2];
+            var d = _matrix[1, 0];
+            var e = _matrix[1, 1];
+            var f = _matrix[1, 2];
+            var g = _matrix[2, 0];
+            var h = _matrix[2, 1];
+            var k = _matrix[2, 2];
+
+            var intermediateMatrix = new Matrix3(new[,]
+                {
+                    {e*k - f*h, c*h - b*k, b*f - c*e},
+                    {f*g - d*k, a*k - c*g, c*d - a*f},
+                    {d*h - e*g, g*b - a*h, a*e - b*d}
+                });
+
+            return (1 / determinant) * intermediateMatrix;
         }
     }
 }

@@ -44,12 +44,12 @@ namespace Tests
             var dimensions = from rows in Enumerable.Range(0, 10)
                              from columns in Enumerable.Range(0, 10)
                              where rows != 3 && columns != 3
-                             select new {rows, columns};
+                             select new { rows, columns };
 
             foreach (var dimension in dimensions)
             {
                 var dimension1 = dimension;
-                Action act = () => new Matrix3(new double[dimension1.rows,dimension1.columns]);
+                Action act = () => new Matrix3(new double[dimension1.rows, dimension1.columns]);
 
                 act.ShouldThrow<Exception>();
             }
@@ -160,9 +160,46 @@ namespace Tests
                     {9, 12, 15}
                 });
 
-            var result = 3*matrix;
+            var result = 3 * matrix;
 
             result.Should().Be(expectedMatrix);
+        }
+
+        [Test]
+        public void Calculates_inverse_correctly_for_invertible_matrix()
+        {
+            var matrix = new Matrix3(new double[,]
+                {
+                    {1, 2, 3},
+                    {0, 1, 4},
+                    {5, 6, 0}
+                });
+
+            var expectedMatrix = new Matrix3(new double[,]
+                {
+                    {-24, 18, 5},
+                    {20, -15, -4},
+                    {-5, 4, 1}
+                });
+
+            var result = matrix.Inverted();
+
+            result.Should().Be(expectedMatrix);
+        }
+
+        [Test]
+        public void Calculates_inverse_correctly_for_non_invertible_matrix()
+        {
+            var matrix = new Matrix3(new double[,]
+                {
+                    {2, 2, 3},
+                    {6, 6, 9},
+                    {1, 4, 8}
+                });
+
+            var result = matrix.Inverted();
+
+            result.Should().BeNull();
         }
     }
 }
