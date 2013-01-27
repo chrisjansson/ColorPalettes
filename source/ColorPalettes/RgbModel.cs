@@ -16,4 +16,14 @@
                 {0.0270343,0.0706872,0.9911085}
             }));
     }
+
+    public class Xyz
+    {
+        public Xyz(Vector3 value)
+        {
+            Value = value;
+        }
+
+        public readonly Vector3 Value;
+    }
 }
