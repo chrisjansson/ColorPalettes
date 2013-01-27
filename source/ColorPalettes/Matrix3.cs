@@ -39,6 +39,21 @@ namespace ColorPalettes
             return new Vector3(x, y, z);
         }
 
+        public static Matrix3 operator *(double scalar, Matrix3 matrix)
+        {
+            var newMatrix = new double[3,3];
+
+            for (var i = 0; i < 3; i++)
+            {
+                for (var j = 0; j < 3; j++)
+                {
+                    newMatrix[i, j] = matrix._matrix[i, j]*scalar;
+                }
+            }
+
+            return new Matrix3(newMatrix);
+        }
+
         public double Determinant { get; private set; }
 
         public Matrix3 Transposed()
