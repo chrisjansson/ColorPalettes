@@ -11,7 +11,7 @@ namespace ColorPalettes
                 {0, 0, 1}
             });
 
-        private readonly double[,] _matrix = new double[3,3];
+        private readonly double[,] _matrix = new double[3, 3];
 
         public Matrix3(double[,] matrix)
         {
@@ -21,6 +21,7 @@ namespace ColorPalettes
             }
 
             Array.Copy(matrix, _matrix, 9);
+            Determinant = CalculateDeterminant();
         }
 
         public double this[int row, int column]
@@ -72,12 +73,24 @@ namespace ColorPalettes
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
             if (obj.GetType() != this.GetType()) return false;
-            return Equals((Matrix3) obj);
+            return Equals((Matrix3)obj);
         }
 
         public override int GetHashCode()
         {
             return (_matrix != null ? _matrix.GetHashCode() : 0);
+        }
+
+        private double CalculateDeterminant()
+        {
+            var aek = _matrix[0, 0] * _matrix[1, 1] * _matrix[2, 2];
+            var bfg = _matrix[0, 1] * _matrix[1, 2] * _matrix[2, 0];
+            var cdh = _matrix[0, 2] * _matrix[1, 0] * _matrix[2, 1];
+            var afh = _matrix[0, 0] * _matrix[1, 2] * _matrix[2, 1];
+            var bkd = _matrix[0, 1] * _matrix[1, 0] * _matrix[2, 2];
+            var ceg = _matrix[0, 2] * _matrix[1, 1] * _matrix[2, 0];
+
+            return aek + bfg + cdh - afh - bkd - ceg;
         }
     }
 }

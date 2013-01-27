@@ -129,5 +129,18 @@ namespace Tests
 
             matrix.Determinant.Should().Be(5);
         }
+
+        [Test]
+        public void Determinant_returns_correct_value_2()
+        {
+            var matrix = new Matrix3(new double[,]
+                {
+                    {2, -2, 0},
+                    {-1, 5, 1},
+                    {3, 4, 5}
+                });
+
+            matrix.Determinant.Should().Be(26);
+        }
     }
 }
