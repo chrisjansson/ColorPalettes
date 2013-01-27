@@ -11,6 +11,8 @@ namespace ColorPalettes
                 {0, 0, 1}
             });
 
+        public readonly double Determinant;
+
         private readonly double[,] _matrix = new double[3, 3];
 
         public Matrix3(double[,] matrix)
@@ -53,8 +55,6 @@ namespace ColorPalettes
 
             return new Matrix3(newMatrix);
         }
-
-        public double Determinant { get; private set; }
 
         public Matrix3 Transposed()
         {
