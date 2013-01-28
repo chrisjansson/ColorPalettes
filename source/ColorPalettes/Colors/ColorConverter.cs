@@ -31,5 +31,10 @@ namespace ColorPalettes.Colors
             var exp = System.Math.Log(value)/Gamma;
             return System.Math.Exp(exp);
         }
+
+        public object ConvertToLuv(Xyz xyz)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

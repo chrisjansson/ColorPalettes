@@ -42,5 +42,16 @@ namespace Tests
             result.Y.Should().BeApproximately(0.2, PrecisionConstant);
             result.Z.Should().BeApproximately(0.1, PrecisionConstant);
         }
+
+        [Test]
+        public void Converts_from_xyz_to_Luv()
+        {
+            var xyzVector = new Vector3(0.047365, 0.039699, 0.010215);
+            var xyz = new Xyz(xyzVector);
+
+            var result = _colorConverter.ConvertToLuv(xyz);
+
+            
+        }
     }
 }
