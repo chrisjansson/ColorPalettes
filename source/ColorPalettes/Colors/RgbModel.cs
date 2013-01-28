@@ -1,4 +1,6 @@
-﻿namespace ColorPalettes
+﻿using ColorPalettes.Math;
+
+namespace ColorPalettes.Colors
 {
     public class RgbModel
     {
@@ -15,15 +17,5 @@
                 {0.2973769,0.6273491,0.0752741},
                 {0.0270343,0.0706872,0.9911085}
             }));
-    }
-
-    public class Xyz
-    {
-        public Xyz(Vector3 value)
-        {
-            Value = value;
-        }
-
-        public readonly Vector3 Value;
     }
 }

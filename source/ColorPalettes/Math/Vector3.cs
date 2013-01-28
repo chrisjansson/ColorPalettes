@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ColorPalettes
+﻿namespace ColorPalettes.Math
 {
     public struct Vector3
     {
@@ -37,9 +35,9 @@ namespace ColorPalettes
 
         public Vector3 Pow(double exponent)
         {
-            var x = Math.Pow(_x, exponent);
-            var y = Math.Pow(_y, exponent);
-            var z = Math.Pow(_z, exponent);
+            var x = System.Math.Pow(_x, exponent);
+            var y = System.Math.Pow(_y, exponent);
+            var z = System.Math.Pow(_z, exponent);
 
             return new Vector3(x, y, z);
         }

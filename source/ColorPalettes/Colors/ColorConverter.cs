@@ -1,6 +1,6 @@
-﻿using System;
+﻿using ColorPalettes.Math;
 
-namespace ColorPalettes
+namespace ColorPalettes.Colors
 {
     public class ColorConverter
     {
@@ -28,8 +28,8 @@ namespace ColorPalettes
 
         private double RemoveGamma(double value)
         {
-            var exp = Math.Log(value)/Gamma;
-            return Math.Exp(exp);
+            var exp = System.Math.Log(value)/Gamma;
+            return System.Math.Exp(exp);
         }
     }
 }

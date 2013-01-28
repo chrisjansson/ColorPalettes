@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ColorPalettes
+namespace ColorPalettes.Math
 {
     public class Matrix3
     {

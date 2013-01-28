@@ -39,13 +39,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
-    <Compile Include="ColorConverter.cs" />
-    <Compile Include="Matrix3.cs" />
+    <Compile Include="Colors\ColorConverter.cs" />
+    <Compile Include="Math\Matrix3.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RgbModel.cs" />
-    <Compile Include="Vector3.cs" />
+    <Compile Include="Colors\RgbModel.cs" />
+    <Compile Include="Math\Vector3.cs" />
+    <Compile Include="Colors\Xyz.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

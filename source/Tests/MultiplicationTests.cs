@@ -1,5 +1,6 @@
 ﻿using System;
 using ColorPalettes;
+using ColorPalettes.Math;
 using NUnit.Framework;
 
 namespace Tests
