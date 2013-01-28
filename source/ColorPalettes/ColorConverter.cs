@@ -19,15 +19,17 @@ namespace ColorPalettes
             var inverted = adobeRgbD65.Matrix.Inverted();
             var transformed = inverted * xyz.Value;
 
-            var x = Gamma * Math.Log(transformed.X);
-            var y = Gamma * Math.Log(transformed.Y);
-            var z = Gamma * Math.Log(transformed.Y);
+            var x = RemoveGamma(transformed.X);
+            var y = RemoveGamma(transformed.Y);
+            var z = RemoveGamma(transformed.Z);
+
+            return new Vector3(x, y, z);
         }
 
         private double RemoveGamma(double value)
         {
-            var lnx = Gamma*Math.Log(value);
-
+            var exp = Math.Log(value)/Gamma;
+            return Math.Exp(exp);
         }
     }
 }
