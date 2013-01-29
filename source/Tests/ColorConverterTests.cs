@@ -68,5 +68,17 @@ namespace Tests
             result.U.Should().BeApproximately(40.6095, PrecisionConstant);
             result.V.Should().BeApproximately(-10.3964, PrecisionConstant);
         }
+
+        [Test]
+        public void Converts_from_luv_to_xyz()
+        {
+            var luv = new Luv(61.3670, 40.6095, -10.3964);
+
+            var result = _colorConverter.ConvertToXyz(luv, WhitePoint.D65);
+
+            result.Value.X.Should().BeApproximately(61.3670, PrecisionConstant);
+            result.Value.Y.Should().BeApproximately(40.6095, PrecisionConstant);
+            result.Value.Z.Should().BeApproximately(-10.3964, PrecisionConstant);
+        }
     }
 }

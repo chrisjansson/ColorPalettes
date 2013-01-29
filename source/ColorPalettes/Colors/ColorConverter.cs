@@ -2,37 +2,11 @@
 
 namespace ColorPalettes.Colors
 {
-    public class Luv
-    {
-        public Luv(double l, double u, double v)
-        {
-            _l = l;
-            _u = u;
-            _v = v;
-        }
-
-        private readonly double _l;
-        public double L
-        {
-            get { return _l; }
-        }
-
-        private readonly double _u;
-        public double U
-        {
-            get { return _u; }
-        }
-
-        private readonly double _v;
-        public double V
-        {
-            get { return _v; }
-        }
-    }
-
     public class ColorConverter
     {
         private const double Gamma = 2.2;
+        private const double Epsilon = 216.0 / 24389.0;
+        private const double K = 24389.0 / 27.0;
 
         public Xyz ConvertToXyz(Vector3 rgb, RgbModel rgbModel)
         {
@@ -62,34 +36,34 @@ namespace ColorPalettes.Colors
 
         public Luv ConvertToLuv(Xyz xyz, WhitePoint referenceWhite)
         {
-            var x = xyz.Value.X;
-            var y = xyz.Value.Y;
-            var z = xyz.Value.Z;
-
-            var up = CalculateU(x, y, z);
+            var up = CalculateU(xyz.Value.X, xyz.Value.Y, xyz.Value.Z);
             var ur = CalculateU(referenceWhite.X, referenceWhite.Y, referenceWhite.Z);
 
-            var vp = CalculateV(x, y, z);
+            var vp = CalculateV(xyz.Value.X, xyz.Value.Y, xyz.Value.Z);
             var vr = CalculateV(referenceWhite.X, referenceWhite.Y, referenceWhite.Z);
 
-            var epsilon = 216.0/24389.0;
-            var K = 24389.0/27.0;
+            var l = CalculateL(xyz.Value.Y, referenceWhite.Y);
+            var u = 13*l*(up - ur);
+            var v = 13*l*(vp - vr);
 
-            double L;
-            var yr = (y/referenceWhite.Y);
-            if (yr > epsilon)
+            return new Luv(l, u, v);
+        }
+
+        private double CalculateL(double y, double referenceWhiteY)
+        {
+            double l;
+            var yr = (y / referenceWhiteY);
+            if (yr > Epsilon)
             {
-                var belowRoot = System.Math.Pow(yr, 1.0/3.0);
-                L = 116*belowRoot - 16;
+                var belowRoot = System.Math.Pow(yr, 1.0 / 3.0);
+                l = 116 * belowRoot - 16;
             }
             else
             {
-                L = K*yr;
+                l = K * yr;
             }
 
-            var u = 13*L*(up - ur);
-            var v = 13*L*(vp - vr);
-            return new Luv(L, u, v);
+            return l;
         }
 
         private double CalculateU(double x, double y, double z)
@@ -100,6 +74,11 @@ namespace ColorPalettes.Colors
         private double CalculateV(double x, double y, double z)
         {
             return (9 * y) / (x + 15 * y + 3 * z);
+        }
+
+        public Xyz ConvertToXyz(Luv luv, WhitePoint rgbModel)
+        {
+            return new Xyz(Vector3.Zero);
         }
     }
 }

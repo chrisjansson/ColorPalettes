@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Colors\ColorConverter.cs" />
+    <Compile Include="Colors\Luv.cs" />
     <Compile Include="Colors\WhitePoints.cs" />
     <Compile Include="Math\Matrix3.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
