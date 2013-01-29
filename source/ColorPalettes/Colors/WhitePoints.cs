@@ -1,5 +1,6 @@
 ﻿namespace ColorPalettes.Colors
 {
+    /* http://www.brucelindbloom.com/index.html?Eqn_ChromAdapt.html */
     public class WhitePoint
     {
         public static WhitePoint A = new WhitePoint(1.09850, 1.00000, 0.35585);

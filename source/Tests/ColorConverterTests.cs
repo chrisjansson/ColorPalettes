@@ -49,9 +49,24 @@ namespace Tests
             var xyzVector = new Vector3(0.047365, 0.039699, 0.010215);
             var xyz = new Xyz(xyzVector);
 
-            var result = _colorConverter.ConvertToLuv(xyz);
+            var result = _colorConverter.ConvertToLuv(xyz, WhitePoint.D65);
 
-            
+            result.L.Should().BeApproximately(23.5717, PrecisionConstant);
+            result.U.Should().BeApproximately(25.5772, PrecisionConstant);
+            result.V.Should().BeApproximately(19.0497, PrecisionConstant);
+        }
+
+        [Test]
+        public void Converts_from_xyz_to_Luv_2()
+        {
+            var xyzVector = new Vector3(0.364692, 0.296684, 0.349866);
+            var xyz = new Xyz(xyzVector);
+
+            var result = _colorConverter.ConvertToLuv(xyz, WhitePoint.D65);
+
+            result.L.Should().BeApproximately(61.3670, PrecisionConstant);
+            result.U.Should().BeApproximately(40.6095, PrecisionConstant);
+            result.V.Should().BeApproximately(-10.3964, PrecisionConstant);
         }
     }
 }
