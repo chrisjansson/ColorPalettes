@@ -73,9 +73,21 @@ namespace Tests
 
             var result = _colorConverter.ConvertToXyz(luv, WhitePoint.D65);
 
-            result.X.Should().BeApproximately(61.3670, PrecisionConstant);
-            result.Y.Should().BeApproximately(40.6095, PrecisionConstant);
-            result.Z.Should().BeApproximately(-10.3964, PrecisionConstant);
+            result.X.Should().BeApproximately(0.364692, PrecisionConstant);
+            result.Y.Should().BeApproximately(0.296684, PrecisionConstant);
+            result.Z.Should().BeApproximately(0.349866, PrecisionConstant);
+        }
+
+        [Test]
+        public void Converts_from_luv_to_xyz_2()
+        {
+            var luv = new Luv(23.5717, 25.5772, 19.0497);
+
+            var result = _colorConverter.ConvertToXyz(luv, WhitePoint.D65);
+
+            result.X.Should().BeApproximately(0.047365, PrecisionConstant);
+            result.Y.Should().BeApproximately(0.039699, PrecisionConstant);
+            result.Z.Should().BeApproximately(0.010215, PrecisionConstant);
         }
     }
 }
