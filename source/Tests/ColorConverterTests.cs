@@ -25,16 +25,15 @@ namespace Tests
 
             var result = _colorConverter.ConvertToXyz(rgb, RgbModel.AdobeRgbD65);
 
-            result.Value.X.Should().BeApproximately(0.047365, PrecisionConstant);
-            result.Value.Y.Should().BeApproximately(0.039699, PrecisionConstant);
-            result.Value.Z.Should().BeApproximately(0.010215, PrecisionConstant);
+            result.X.Should().BeApproximately(0.047365, PrecisionConstant);
+            result.Y.Should().BeApproximately(0.039699, PrecisionConstant);
+            result.Z.Should().BeApproximately(0.010215, PrecisionConstant);
         }
 
         [Test]
         public void Converts_from_xyz_to_rgb()
         {
-            var xyzVector = new Vector3(0.047365, 0.039699, 0.010215);
-            var xyz = new Xyz(xyzVector);
+            var xyz = new Xyz(0.047365, 0.039699, 0.010215);
 
             var result = _colorConverter.ConvertToRgb(xyz, RgbModel.AdobeRgbD65);
 
@@ -46,8 +45,7 @@ namespace Tests
         [Test]
         public void Converts_from_xyz_to_Luv()
         {
-            var xyzVector = new Vector3(0.047365, 0.039699, 0.010215);
-            var xyz = new Xyz(xyzVector);
+            var xyz = new Xyz(0.047365, 0.039699, 0.010215);
 
             var result = _colorConverter.ConvertToLuv(xyz, WhitePoint.D65);
 
@@ -59,8 +57,7 @@ namespace Tests
         [Test]
         public void Converts_from_xyz_to_Luv_2()
         {
-            var xyzVector = new Vector3(0.364692, 0.296684, 0.349866);
-            var xyz = new Xyz(xyzVector);
+            var xyz = new Xyz(0.364692, 0.296684, 0.349866);
 
             var result = _colorConverter.ConvertToLuv(xyz, WhitePoint.D65);
 
@@ -76,9 +73,9 @@ namespace Tests
 
             var result = _colorConverter.ConvertToXyz(luv, WhitePoint.D65);
 
-            result.Value.X.Should().BeApproximately(61.3670, PrecisionConstant);
-            result.Value.Y.Should().BeApproximately(40.6095, PrecisionConstant);
-            result.Value.Z.Should().BeApproximately(-10.3964, PrecisionConstant);
+            result.X.Should().BeApproximately(61.3670, PrecisionConstant);
+            result.Y.Should().BeApproximately(40.6095, PrecisionConstant);
+            result.Z.Should().BeApproximately(-10.3964, PrecisionConstant);
         }
     }
 }

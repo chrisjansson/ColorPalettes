@@ -13,13 +13,13 @@ namespace ColorPalettes.Colors
             var gammaCorrectedRgb = rgb.Pow(Gamma);
 
             var result = rgbModel.Matrix * gammaCorrectedRgb;
-            return new Xyz(result);
+            return new Xyz(result.X, result.Y, result.Z);
         }
 
         public Vector3 ConvertToRgb(Xyz xyz, RgbModel adobeRgbD65)
         {
             var inverted = adobeRgbD65.Matrix.Inverted();
-            var transformed = inverted * xyz.Value;
+            var transformed = inverted * new Vector3(xyz.X, xyz.Y, xyz.Z);
 
             var x = RemoveGamma(transformed.X);
             var y = RemoveGamma(transformed.Y);
@@ -36,13 +36,13 @@ namespace ColorPalettes.Colors
 
         public Luv ConvertToLuv(Xyz xyz, WhitePoint referenceWhite)
         {
-            var up = CalculateU(xyz.Value.X, xyz.Value.Y, xyz.Value.Z);
+            var up = CalculateU(xyz.X, xyz.Y, xyz.Z);
             var ur = CalculateU(referenceWhite.X, referenceWhite.Y, referenceWhite.Z);
 
-            var vp = CalculateV(xyz.Value.X, xyz.Value.Y, xyz.Value.Z);
+            var vp = CalculateV(xyz.X, xyz.Y, xyz.Z);
             var vr = CalculateV(referenceWhite.X, referenceWhite.Y, referenceWhite.Z);
 
-            var l = CalculateL(xyz.Value.Y, referenceWhite.Y);
+            var l = CalculateL(xyz.Y, referenceWhite.Y);
             var u = 13*l*(up - ur);
             var v = 13*l*(vp - vr);
 
@@ -78,7 +78,7 @@ namespace ColorPalettes.Colors
 
         public Xyz ConvertToXyz(Luv luv, WhitePoint rgbModel)
         {
-            return new Xyz(Vector3.Zero);
+            return new Xyz(0, 0, 0);
         }
     }
 }

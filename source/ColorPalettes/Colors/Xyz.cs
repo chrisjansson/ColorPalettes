@@ -1,14 +1,30 @@
-﻿using ColorPalettes.Math;
-
-namespace ColorPalettes.Colors
+﻿namespace ColorPalettes.Colors
 {
     public class Xyz
     {
-        public Xyz(Vector3 value)
+        public Xyz(double x, double y, double z)
         {
-            Value = value;
+            _x = x;
+            _y = y;
+            _z = z;
+        }
+        
+        private readonly double _x;
+        public double X
+        {
+            get { return _x; }
         }
 
-        public readonly Vector3 Value;
+        private readonly double _y;
+        public double Y
+        {
+            get { return _y; }
+        }
+
+        private readonly double _z;
+        public double Z
+        {
+            get { return _z; }
+        }
     }
 }
