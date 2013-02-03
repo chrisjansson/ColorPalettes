@@ -107,5 +107,52 @@ namespace ColorPalettes.Colors
 
             return y;
         }
+
+        public Lchuv ConvertToLchuv(Luv luv)
+        {
+            var belowRoot = System.Math.Pow(luv.U, 2) + System.Math.Pow(luv.V, 2);
+            var c = System.Math.Sqrt(belowRoot);
+            var h = System.Math.Atan2(luv.V, luv.U) * 180 / System.Math.PI;
+
+            if (h < 0)
+            {
+                h += 360.0;
+            }
+
+            if (h >= 360.0)
+            {
+                h -= 360.0;
+            }
+
+            return new Lchuv(luv.L, c, h);
+        }
+    }
+
+    public class Lchuv
+    {
+        public Lchuv(double l, double c, double h)
+        {
+            _l = l;
+            _c = c;
+            _h = h;
+        }
+
+        private readonly double _l;
+        public double L
+        {
+            get { return _l; }
+        }
+
+        private readonly double _c;
+        public double C
+        {
+            get { return _c; }
+        }
+
+        private readonly double _h;
+        public double H
+        {
+            get { return _h; }
+        }
     }
 }

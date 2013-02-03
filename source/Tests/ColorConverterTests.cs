@@ -1,4 +1,5 @@
-﻿using ColorPalettes.Colors;
+﻿using System;
+using ColorPalettes.Colors;
 using ColorPalettes.Math;
 using NUnit.Framework;
 using FluentAssertions;
@@ -87,6 +88,30 @@ namespace Tests
             result.X.Should().BeApproximately(0.047365, PrecisionConstant);
             result.Y.Should().BeApproximately(0.039699, PrecisionConstant);
             result.Z.Should().BeApproximately(0.010215, PrecisionConstant);
+        }
+
+        [Test]
+        public void Converts_from_luv_to_LCHuv()
+        {
+            var luv = new Luv(23.5717, 25.5772, 19.0497);
+
+            var result = _colorConverter.ConvertToLchuv(luv);
+
+            result.L.Should().BeApproximately(23.5717, PrecisionConstant);
+            result.C.Should().BeApproximately(31.8918, PrecisionConstant);
+            result.H.Should().BeApproximately(36.6785, PrecisionConstant);
+        }
+
+        [Test]
+        public void Converts_from_luv_to_LCHuv_2()
+        {
+            var luv = new Luv(61.3670, 40.6095, -10.3964);
+
+            var result = _colorConverter.ConvertToLchuv(luv);
+
+            result.L.Should().BeApproximately(61.3670, PrecisionConstant);
+            result.C.Should().BeApproximately(41.9192, PrecisionConstant);
+            result.H.Should().BeApproximately(345.6402, PrecisionConstant);
         }
     }
 }
