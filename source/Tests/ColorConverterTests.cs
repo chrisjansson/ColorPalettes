@@ -113,5 +113,29 @@ namespace Tests
             result.C.Should().BeApproximately(41.9192, PrecisionConstant);
             result.H.Should().BeApproximately(345.6402, PrecisionConstant);
         }
+
+        [Test]
+        public void Converts_from_LCHuv_to_Luv()
+        {
+            var lchuv = new Lchuv(23.5717, 31.8918, 36.6785);
+
+            var result = _colorConverter.ConvertToLLuv(lchuv);
+
+            result.L.Should().BeApproximately(23.5717, PrecisionConstant);
+            result.U.Should().BeApproximately(25.5772, PrecisionConstant);
+            result.V.Should().BeApproximately(19.0497, PrecisionConstant);
+        }
+
+        [Test]
+        public void Converts_from_LCHuv_to_Luv_2()
+        {
+            var lchuv = new Lchuv(61.3670, 41.9192, 345.6402);
+
+            var result = _colorConverter.ConvertToLLuv(lchuv);
+
+            result.L.Should().BeApproximately(61.3670, PrecisionConstant);
+            result.U.Should().BeApproximately(40.6095, PrecisionConstant);
+            result.V.Should().BeApproximately(-10.3964, PrecisionConstant);
+        }
     }
 }

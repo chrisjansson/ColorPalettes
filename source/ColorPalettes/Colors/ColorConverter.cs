@@ -126,6 +126,15 @@ namespace ColorPalettes.Colors
 
             return new Lchuv(luv.L, c, h);
         }
+
+        public Luv ConvertToLLuv(Lchuv lchuv)
+        {
+            var hInRadians = lchuv.H*(System.Math.PI/180.0);
+            var u = lchuv.C*System.Math.Cos(hInRadians);
+            var v = lchuv.C*System.Math.Sin(hInRadians);
+
+            return new Luv(lchuv.L, u, v);
+        }
     }
 
     public class Lchuv
