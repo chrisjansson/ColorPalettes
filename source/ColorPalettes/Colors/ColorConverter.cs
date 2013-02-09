@@ -36,11 +36,11 @@ namespace ColorPalettes.Colors
 
         public Luv ConvertToLuv(Xyz xyz, WhitePoint referenceWhite)
         {
-            var up = CalculateU(xyz.X, xyz.Y, xyz.Z);
-            var ur = CalculateU(referenceWhite.X, referenceWhite.Y, referenceWhite.Z);
+            var up = xyz.U;
+            var ur = referenceWhite.U;
 
-            var vp = CalculateV(xyz.X, xyz.Y, xyz.Z);
-            var vr = CalculateV(referenceWhite.X, referenceWhite.Y, referenceWhite.Z);
+            var vp = xyz.V;
+            var vr = referenceWhite.V;
 
             var l = CalculateL(xyz.Y, referenceWhite.Y);
             var u = 13 * l * (up - ur);
@@ -66,16 +66,6 @@ namespace ColorPalettes.Colors
             return l;
         }
 
-        private double CalculateU(double x, double y, double z)
-        {
-            return (4 * x) / (x + 15 * y + 3 * z);
-        }
-
-        private double CalculateV(double x, double y, double z)
-        {
-            return (9 * y) / (x + 15 * y + 3 * z);
-        }
-
         public Xyz ConvertToXyz(Luv luv, WhitePoint rgbModel)
         {
             var up = (4*rgbModel.X)/(rgbModel.X + 15*rgbModel.Y + 3*rgbModel.Z);
@@ -84,7 +74,7 @@ namespace ColorPalettes.Colors
 
             var a = (1.0/3.0)*((52*luv.L)/(luv.U + 13*luv.L*up) - 1);
             var b = -5*y;
-            var c = -1.0/3.0;
+            const double c = -1.0/3.0;
             var d = y*((39*luv.L)/(luv.V + 13*luv.L*vp) - 5);
 
             var x = (d - b)/(a - c);
@@ -95,7 +85,7 @@ namespace ColorPalettes.Colors
 
         private double CalculateY(Luv luv)
         {
-            double y = 0.0;
+            double y;
             if (luv.L > K*Epsilon)
             {
                 y = System.Math.Pow(((luv.L + 16)/116.0), 3);
