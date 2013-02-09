@@ -1,7 +1,7 @@
 ﻿namespace ColorPalettes.Colors
 {
     /* http://www.brucelindbloom.com/index.html?Eqn_ChromAdapt.html */
-    public class WhitePoint
+    public class WhitePoint : Xyz
     {
         public static WhitePoint A = new WhitePoint(1.09850, 1.00000, 0.35585);
         public static WhitePoint B = new WhitePoint(0.99072, 1.00000, 0.85223);
@@ -15,29 +15,6 @@
         public static WhitePoint F7 = new WhitePoint(0.95041, 1.00000, 1.08747);
         public static WhitePoint F11 = new WhitePoint(1.00962, 1.00000, 0.64350);
 
-        private WhitePoint(double x, double y, double z)
-        {
-            _x = x;
-            _y = y;
-            _z = z;
-        }
-
-        private readonly double _x;
-        public double X
-        {
-            get { return _x; }
-        }
-
-        private readonly double _y;
-        public double Y
-        {
-            get { return _y; }
-        }
-
-        private readonly double _z;
-        public double Z
-        {
-            get { return _z; }
-        }
+        private WhitePoint(double x, double y, double z) : base(x, y, z) { }
     }
 }
