@@ -7,8 +7,11 @@
             _x = x;
             _y = y;
             _z = z;
+
+            _u = (4 * x) / (x + 15 * y + 3 * z);
+            _v = (9 * y) / (x + 15 * y + 3 * z);
         }
-        
+
         private readonly double _x;
         public double X
         {
@@ -25,6 +28,18 @@
         public double Z
         {
             get { return _z; }
+        }
+
+        private readonly double _u;
+        public double U
+        {
+            get { return _u; }
+        }
+
+        private readonly double _v;
+        public double V
+        {
+            get { return _v; }
         }
     }
 }
