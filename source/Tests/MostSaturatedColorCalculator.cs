@@ -2,6 +2,7 @@
 using ColorPalettes.Colors;
 using ColorPalettes.Math;
 using NUnit.Framework;
+using FluentAssertions;
 
 namespace Tests
 {
@@ -10,41 +11,85 @@ namespace Tests
         private RgbModel _rgbModel;
         private double _alpha;
         private double _beta;
+        private double _h0;
+        private double _h1;
+        private double _h2;
+        private double _h3;
+        private double _h4;
+        private double _h5;
 
-        public Vector3 Monkey(double hue, RgbModel adobeRgbD65)
+        public Vector3 Monkey(double hue, RgbModel rgbModel)
         {
-            _rgbModel = adobeRgbD65;
-            var hueInRadians = hue * (Math.PI / 180.0);
-            _alpha = -Math.Sin(hueInRadians);
-            _beta = Math.Cos(hueInRadians);
+            Assert.AreSame(RgbModel.AdobeRgbD65, rgbModel, "Segment selection doesn't work for anything else. See paper");
 
-            var gamma = 2.2;
+            _rgbModel = rgbModel;
 
-            double mRX = _rgbModel.Matrix[0, 0];
-            double mRY = _rgbModel.Matrix[1, 0];
-            double mRZ = _rgbModel.Matrix[2, 0];
-            double mGX = _rgbModel.Matrix[0, 1];
-            double mGY = _rgbModel.Matrix[1, 1];
-            double mGZ = _rgbModel.Matrix[2, 1];
-            double mBX = _rgbModel.Matrix[0, 2];
-            double mBY = _rgbModel.Matrix[1, 2];
-            double mBZ = _rgbModel.Matrix[2, 2];
+            CalculateSegments();
 
-            var un = _rgbModel.WhitePoint.U;
-            var vn = _rgbModel.WhitePoint.V;
+            var r = double.NaN;
+            var g = double.NaN;
+            var b = double.NaN;
 
-            Math.Pow(-((_alpha * un + _beta * vn) * (mGX + 15 * mGY + 3 * mGZ) - (4 * _alpha * mGX + 9 * _beta * mGY)) / ((_alpha * un + _beta * vn) * (mRX + 15 * mRY + 3 * mRZ) - (4 * _alpha * mRX + 9 * _beta * mRY)), 1 / gamma);
+            if (hue >= _h0 && hue < _h1)
+            {
+                r = 1.0;
+                g = 0.5;
+                b = 0.0;
+            }
+            else if (hue >= _h1 && hue < _h2)
+            {
+                r = 0.5;
+                g = 1.0;
+                b = 0.0;
+            }
+            else if (hue >= _h2 && hue < _h3)
+            {
+                r = 0.0;
+                g = 1.0;
+                b = 0.5;
+            }
+            else if (hue >= _h3 && hue < _h4)
+            {
+                r = 0.0;
+                g = 0.5;
+                b = 1.0;
+            }
+            else if (hue >= _h4 && hue < _h5)
+            {
+                r = 0.5;
+                g = 0.0;
+                b = 1.0;
+            }
+            else if(hue >= _h5 || hue < _h0)
+            {
+                r = 1.0;
+                g = 0.0;
+                b = 0.5;
+            }
 
-            //var over = CalculateOver();
-            //var below = CalculateBelow();
+            return new Vector3(r, g, b);
+        }
 
-            //var d = over / below;
-            //var d1 = 1.0 / 2.2;
-            //var pow = Math.Pow(d, d1);
+        private void CalculateSegments()
+        {
+            _h0 = ConvertToLch(1.0, 0.0, 0.0);
+            _h1 = ConvertToLch(1.0, 1.0, 0.0);
+            _h2 = ConvertToLch(0.0, 1.0, 0.0);
+            _h3 = ConvertToLch(0.0, 1.0, 1.0);
+            _h4 = ConvertToLch(0.0, 0.0, 1.0);
+            _h5 = ConvertToLch(1.0, 0.0, 1.0);
+        }
 
-            //Console.WriteLine(pow);
+        private double ConvertToLch(double r, double g, double b)
+        {
+            var colorConverter = new ColorConverter();
 
-            return Vector3.Zero;
+            var rgb = new Vector3(r, g, b);
+            var xyz = colorConverter.ConvertToXyz(rgb, RgbModel.AdobeRgbD65);
+            var luv = colorConverter.ConvertToLuv(xyz, RgbModel.AdobeRgbD65.WhitePoint);
+            var lch = colorConverter.ConvertToLchuv(luv);
+
+            return lch.H;
         }
 
         private double CalculateOver()
@@ -101,11 +146,62 @@ namespace Tests
 
             return lch.H;
         }
+        
+        //Test h5 >= h || h < h0 := h >= h5 and h < h0
 
         [Test]
-        public void Something()
+        public void Creates_color_with_components_in_correct_place_for_first_line_segment()
         {
-            
+            var color = _calculator.Monkey(20.0, RgbModel.AdobeRgbD65);
+
+            AssertColor(1.0, 0.5, 0.0, color);
+        }
+
+        [Test]
+        public void Creates_color_with_components_in_correct_place_for_second_line_segment()
+        {
+            var color = _calculator.Monkey(90.0, RgbModel.AdobeRgbD65);
+
+            AssertColor(0.5, 1.0, 0.0, color);
+        }
+
+        [Test]
+        public void Creates_color_with_components_in_correct_place_for_third_line_segment()
+        {
+            var color = _calculator.Monkey(150.0, RgbModel.AdobeRgbD65);
+
+            AssertColor(0.0, 1.0, 0.5, color);
+        }
+
+        [Test]
+        public void Creates_color_with_components_in_correct_place_for_fourth_line_segment()
+        {
+            var color = _calculator.Monkey(260.0, RgbModel.AdobeRgbD65);
+
+            AssertColor(0.0, 0.5, 1.0, color);
+        }
+
+        [Test]
+        public void Creates_color_with_components_in_correct_place_for_fifth_line_segment()
+        {
+            var color = _calculator.Monkey(310.0, RgbModel.AdobeRgbD65);
+
+            AssertColor(0.5, 0.0, 1.0, color);
+        }
+
+        [Test]
+        public void Creates_color_with_components_in_correct_place_for_sixth_line_segment()
+        {
+            var color = _calculator.Monkey(320.0, RgbModel.AdobeRgbD65);
+
+            AssertColor(1.0, 0.0, 0.5, color);
+        }
+
+        private static void AssertColor(double r, double g, double b, Vector3 color)
+        {
+            color.X.Should().Be(r);
+            color.Y.Should().Be(g);
+            color.Z.Should().Be(b);
         }
     }
 }
