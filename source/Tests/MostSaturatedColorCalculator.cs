@@ -147,7 +147,7 @@ namespace Tests
             return lch.H;
         }
         
-        //Test h5 >= h || h < h0 := h >= h5 and h < h0
+
 
         [Test]
         public void Creates_color_with_components_in_correct_place_for_first_line_segment()
@@ -193,6 +193,14 @@ namespace Tests
         public void Creates_color_with_components_in_correct_place_for_sixth_line_segment()
         {
             var color = _calculator.Monkey(320.0, RgbModel.AdobeRgbD65);
+
+            AssertColor(1.0, 0.0, 0.5, color);
+        }
+
+        [Test]
+        public void Creates_color_with_components_in_correct_place_for_sixth_line_segment_2()
+        {
+            var color = _calculator.Monkey(10.0, RgbModel.AdobeRgbD65);
 
             AssertColor(1.0, 0.0, 0.5, color);
         }
