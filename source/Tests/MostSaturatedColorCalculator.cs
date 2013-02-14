@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using ColorPalettes.Colors;
 using ColorPalettes.Math;
 using NUnit.Framework;
@@ -6,6 +7,49 @@ using FluentAssertions;
 
 namespace Tests
 {
+    public class Segment
+    {
+        private readonly int _rho;
+        private readonly int _sigma;
+        private readonly int _tau;
+
+        public Segment(int rho, int sigma, int tau)
+        {
+            _tau = tau;
+            _sigma = sigma;
+            _rho = rho;
+        }
+
+        public Vector3 Assemble(double rho, double sigma, double tau)
+        {
+            var values = new double[3];
+            values[_rho] = rho;
+            values[_sigma] = sigma;
+            values[_tau] = tau;
+
+            return new Vector3(values[0], values[1], values[2]);
+        }
+
+        public Vector3 GetTauVector(Matrix3 matrix3)
+        {
+            return GetCalculationVector(matrix3, _tau);
+        }
+
+        public Vector3 GetRhoVector(Matrix3 matrix3)
+        {
+            return GetCalculationVector(matrix3, _rho);
+        }
+
+        private Vector3 GetCalculationVector(Matrix3 matrix3, int column)
+        {
+            var x = matrix3[0, column];
+            var y = matrix3[1, column];
+            var z = matrix3[2, column];
+
+            return new Vector3(x, y, z);
+        }
+    }
+
     public class MostSaturatedColorCalculator
     {
         private RgbModel _rgbModel;
@@ -17,6 +61,7 @@ namespace Tests
         private double _h3;
         private double _h4;
         private double _h5;
+        private Segment _segment;
 
         public Vector3 Monkey(double hue, RgbModel rgbModel)
         {
@@ -26,48 +71,38 @@ namespace Tests
 
             CalculateSegments();
 
-            var r = double.NaN;
-            var g = double.NaN;
-            var b = double.NaN;
-
             if (hue >= _h0 && hue < _h1)
             {
-                r = 1.0;
-                g = 0.5;
-                b = 0.0;
+                _segment = new Segment(1, 2, 0);
             }
             else if (hue >= _h1 && hue < _h2)
             {
-                r = 0.5;
-                g = 1.0;
-                b = 0.0;
+                _segment = new Segment(0, 1, 2);
             }
             else if (hue >= _h2 && hue < _h3)
             {
-                r = 0.0;
-                g = 1.0;
-                b = 0.5;
+                _segment = new Segment(2, 1, 0);
             }
             else if (hue >= _h3 && hue < _h4)
             {
-                r = 0.0;
-                g = 0.5;
-                b = 1.0;
+                _segment = new Segment(1, 0, 2);
             }
             else if (hue >= _h4 && hue < _h5)
             {
-                r = 0.5;
-                g = 0.0;
-                b = 1.0;
+                _segment = new Segment(0, 1, 2);
             }
             else if(hue >= _h5 || hue < _h0)
             {
-                r = 1.0;
-                g = 0.0;
-                b = 0.5;
+                _segment = new Segment(2, 1, 0);
+            }
+            else
+            {
+                throw new NoNullAllowedException();
             }
 
-            return new Vector3(r, g, b);
+
+
+            return _segment.Assemble(0.5, 0.0, 1.0);
         }
 
         private void CalculateSegments()
