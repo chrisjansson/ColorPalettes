@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace ColorPalettes.Colors
 {
-    public class SegmentProvider
+    public class SegmentProvider : ISegmentProvider
     {
         private const int R = 0;
         private const int G = 1;
