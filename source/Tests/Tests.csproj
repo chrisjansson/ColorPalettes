@@ -54,6 +54,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SegmentProviderTests.cs" />
+    <Compile Include="SegmentTests.cs" />
     <Compile Include="Vector3Tests.cs" />
     <Compile Include="XyzTests.cs" />
   </ItemGroup>
