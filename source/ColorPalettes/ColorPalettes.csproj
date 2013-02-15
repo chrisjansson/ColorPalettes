@@ -42,6 +42,7 @@
     <Compile Include="Colors\ColorConverter.cs" />
     <Compile Include="Colors\ISegmentProvider.cs" />
     <Compile Include="Colors\Luv.cs" />
+    <Compile Include="Colors\MostSaturatedColorCalculator.cs" />
     <Compile Include="Colors\Segment.cs" />
     <Compile Include="Colors\SegmentProvider.cs" />
     <Compile Include="Colors\WhitePoints.cs" />
