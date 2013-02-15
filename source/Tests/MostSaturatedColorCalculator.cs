@@ -100,9 +100,37 @@ namespace Tests
                 throw new NoNullAllowedException();
             }
 
+            const double toRadians = (Math.PI/180.0);
+            _alpha = -Math.Sin(hue*toRadians);
+            _beta = Math.Cos(hue*toRadians);
 
+            var over = CalculateOver();
+            var below = CalculateBelow();
+            var beforePow = - over/below;
 
-            return _segment.Assemble(0.5, 0.0, 1.0);
+            var sigma = Math.Pow(beforePow, 1/2.2);
+
+            return _segment.Assemble(sigma, 0.0, 1.0);
+        }
+
+        private double CalculateOver()
+        {
+            var tau = _segment.GetTauVector(_rgbModel.Matrix);
+
+            var a = tau.X + 15*tau.Y + 3*tau.Z;
+            var f = 4*_alpha*tau.X + 9*_beta*tau.Y;
+
+            return (_alpha*_rgbModel.WhitePoint.U + _beta*_rgbModel.WhitePoint.V)*a - f;
+        }
+
+        private double CalculateBelow()
+        {
+            var tau = _segment.GetRhoVector(_rgbModel.Matrix);
+
+            var a = tau.X + 15 * tau.Y + 3 * tau.Z;
+            var f = 4 * _alpha * tau.X + 9 * _beta * tau.Y;
+
+            return (_alpha * _rgbModel.WhitePoint.U + _beta * _rgbModel.WhitePoint.V) * a - f;
         }
 
         private void CalculateSegments()
@@ -125,30 +153,6 @@ namespace Tests
             var lch = colorConverter.ConvertToLchuv(luv);
 
             return lch.H;
-        }
-
-        private double CalculateOver()
-        {
-            var matrix = _rgbModel.Matrix;
-
-            var a2 = matrix[0, 2] + 15 * matrix[1, 2] + 3 * matrix[2, 2];
-            var a1 = 4 * _alpha * matrix[0, 2] + 9 * _beta * matrix[1, 2];
-
-            var d = _alpha * _rgbModel.WhitePoint.U + _beta * _rgbModel.WhitePoint.V;
-
-            return d * a2 - a1;
-        }
-
-        private double CalculateBelow()
-        {
-            var matrix = _rgbModel.Matrix;
-
-            var f1 = 4 * _alpha * matrix[0, 0] + 9 * _beta * matrix[1, 0];
-            var f2 = matrix[0, 0] + 15 * matrix[1, 0] + 3 * matrix[2, 0];
-
-            var d = _alpha * _rgbModel.WhitePoint.U + _beta * _rgbModel.WhitePoint.V;
-
-            return f1 - d * f2;
         }
     }
 
@@ -181,8 +185,17 @@ namespace Tests
 
             return lch.H;
         }
-        
 
+        [Test]
+        public void Monkey()
+        {
+            for (int i = 0; i < 360; i++)
+            {
+                var color = _calculator.Monkey(i, RgbModel.AdobeRgbD65);
+
+                Console.WriteLine("{0}: {1} {2} {3}", i, color.X, color.Y, color.Z);
+            }
+        }
 
         [Test]
         public void Creates_color_with_components_in_correct_place_for_first_line_segment()
