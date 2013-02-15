@@ -110,7 +110,7 @@ namespace Tests
 
             var sigma = Math.Pow(beforePow, 1/2.2);
 
-            return _segment.Assemble(sigma, 0.0, 1.0);
+            return _segment.Assemble(0.5, 0.0, 1.0);
         }
 
         private double CalculateOver()
@@ -184,17 +184,6 @@ namespace Tests
             var lch = colorConverter.ConvertToLchuv(luv);
 
             return lch.H;
-        }
-
-        [Test]
-        public void Monkey()
-        {
-            for (int i = 0; i < 360; i++)
-            {
-                var color = _calculator.Monkey(i, RgbModel.AdobeRgbD65);
-
-                Console.WriteLine("{0}: {1} {2} {3}", i, color.X, color.Y, color.Z);
-            }
         }
 
         [Test]
