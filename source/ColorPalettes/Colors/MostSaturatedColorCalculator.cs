@@ -5,38 +5,55 @@ namespace ColorPalettes.Colors
     public class MostSaturatedColorCalculator
     {
         private RgbModel _rgbModel;
+        private double _hue;
+
+        private Segment _segment;
         private double _alpha;
         private double _beta;
-        private Segment _segment;
 
-        public Vector3 Monkey(double hue, RgbModel rgbModel)
+        public Vector3 CalculatMostSignificantColor(double hue, RgbModel rgbModel)
         {
-            var segmentProvider = new SegmentProvider(rgbModel);
-            _segment = segmentProvider.GetSegmentForHue(hue);
-
             _rgbModel = rgbModel;
+            _hue = (hue%360.0);
 
+            GetColorSegment();
+            CalculateAlphaBeta();
+
+            var variableColor = CalculateVariableColor();
+            return _segment.Assemble(variableColor, 0.0, 1.0);
+        }
+
+        private void GetColorSegment()
+        {
+            var segmentProvider = new SegmentProvider(_rgbModel);
+            _segment = segmentProvider.GetSegmentForHue(_hue);
+        }
+
+        private void CalculateAlphaBeta()
+        {
             const double toRadians = (System.Math.PI/180.0);
-            _alpha = -System.Math.Sin(hue*toRadians);
-            _beta = System.Math.Cos(hue*toRadians);
+            _alpha = -System.Math.Sin(_hue*toRadians);
+            _beta = System.Math.Cos(_hue*toRadians);
+        }
 
+        private double CalculateVariableColor()
+        {
             var over = CalculateOver();
             var below = CalculateBelow();
-            var beforePow = - over/below;
 
-            var sigma = System.Math.Pow(beforePow, 1/2.2);
-
-            return _segment.Assemble(sigma, 0.0, 1.0);
+            const double gamma = 2.2;
+            var sigma = System.Math.Pow(-over/below, 1/gamma);
+            return sigma;
         }
 
         private double CalculateOver()
         {
             var tau = _segment.GetTauVector(_rgbModel.Matrix);
 
-            var a = tau.X + 15*tau.Y + 3*tau.Z;
-            var f = 4*_alpha*tau.X + 9*_beta*tau.Y;
+            var a = tau.X + 15 * tau.Y + 3 * tau.Z;
+            var f = 4 * _alpha * tau.X + 9 * _beta * tau.Y;
 
-            return (_alpha*_rgbModel.WhitePoint.U + _beta*_rgbModel.WhitePoint.V)*a - f;
+            return (_alpha * _rgbModel.WhitePoint.U + _beta * _rgbModel.WhitePoint.V) * a - f;
         }
 
         private double CalculateBelow()
