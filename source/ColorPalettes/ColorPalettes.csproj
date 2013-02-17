@@ -46,6 +46,7 @@
     <Compile Include="Colors\Segment.cs" />
     <Compile Include="Colors\SegmentProvider.cs" />
     <Compile Include="Colors\WhitePoints.cs" />
+    <Compile Include="Math\BezierCurve.cs" />
     <Compile Include="Math\Matrix3.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Colors\RgbModel.cs" />
