@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Colors\ArcLengthFunction.cs" />
     <Compile Include="Colors\ColorConverter.cs" />
     <Compile Include="Colors\DistanceCalculator.cs" />
     <Compile Include="Colors\ISegmentProvider.cs" />
