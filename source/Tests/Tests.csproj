@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CubicBezierCurveTests.cs" />
     <Compile Include="DistanceCalculatorTests.cs" />
     <Compile Include="QuadraticBezierCurveTests.cs" />
     <Compile Include="ColorConverterTests.cs" />
