@@ -2,28 +2,37 @@
 {
     public class BezierCurve
     {
-        private readonly Vector3 _p0;
-        private readonly Vector3 _p1;
-        private readonly Vector3 _p2;
+        private readonly Vector3[] _points;
 
-        public BezierCurve(Vector3 p0, Vector3 p1, Vector3 p2)
+        public BezierCurve(params Vector3[] points)
         {
-            _p2 = p2;
-            _p1 = p1;
-            _p0 = p0;
+            _points = points;
         }
 
         public Vector3 Calculate(double u)
         {
-            var r0 = Lerp(_p0, _p1, u);
-            var r1= Lerp(_p1, _p2, u);
+            return CalculateRecursively(u, _points);
+        }
 
-            return Lerp(r0, r1, u);
+        private Vector3 CalculateRecursively(double u, Vector3[] points)
+        {
+            if (points.Length == 2)
+            {
+                return Lerp(points[0], points[1], u);
+            }
+
+            var newPoints = new Vector3[points.Length - 1];
+            for (var i = 0; i < points.Length - 1; i++)
+            {
+                newPoints[i] = Lerp(points[i], points[i + 1], u);
+            }
+
+            return CalculateRecursively(u, newPoints);
         }
 
         private Vector3 Lerp(Vector3 a, Vector3 b, double t)
         {
-            return a + (b - a)*t;
+            return a + (b - a) * t;
         }
     }
 }
