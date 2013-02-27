@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArcLengthCalculatorTests.cs" />
     <Compile Include="CubicBezierCurveTests.cs" />
     <Compile Include="DistanceCalculatorTests.cs" />
     <Compile Include="SequentialBezierCurveTests.cs" />
