@@ -1,6 +1,4 @@
-﻿using ColorPalettes.Math;
-
-namespace ColorPalettes.Colors
+﻿namespace ColorPalettes.Colors
 {
     public class ArcLengthFunction
     {
@@ -9,6 +7,8 @@ namespace ColorPalettes.Colors
         public ArcLengthFunction(ILuvDistanceCalculator distanceCalculator)
         {
             _distanceCalculator = distanceCalculator;
+
+
         }
 
         public double Calculate(int step, int numberOfLineSegments, IBezierCurve curve)
@@ -30,10 +30,5 @@ namespace ColorPalettes.Colors
 
             return sum;
         }
-    }
-
-    public interface IBezierCurve   
-    {
-        Vector3 Calculate(double u);
     }
 }

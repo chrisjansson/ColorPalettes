@@ -35,6 +35,9 @@
     <Reference Include="FluentAssertions">
       <HintPath>..\packages\FluentAssertions.2.0.0.1\lib\net45\FluentAssertions.dll</HintPath>
     </Reference>
+    <Reference Include="NSubstitute">
+      <HintPath>..\packages\NSubstitute.1.5.0.0\lib\NET40\NSubstitute.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>
     </Reference>
@@ -49,6 +52,7 @@
   <ItemGroup>
     <Compile Include="CubicBezierCurveTests.cs" />
     <Compile Include="DistanceCalculatorTests.cs" />
+    <Compile Include="SequentialBezierCurveTests.cs" />
     <Compile Include="QuadraticBezierCurveTests.cs" />
     <Compile Include="ColorConverterTests.cs" />
     <Compile Include="Matrix3Tests.cs" />

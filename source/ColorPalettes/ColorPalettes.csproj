@@ -42,6 +42,7 @@
     <Compile Include="Colors\ArcLengthFunction.cs" />
     <Compile Include="Colors\ColorConverter.cs" />
     <Compile Include="Colors\DistanceCalculator.cs" />
+    <Compile Include="Colors\IBezierCurve.cs" />
     <Compile Include="Colors\ISegmentProvider.cs" />
     <Compile Include="Colors\Luv.cs" />
     <Compile Include="Colors\MostSaturatedColorCalculator.cs" />
