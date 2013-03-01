@@ -1,5 +1,4 @@
-﻿using ColorPalettes.Math;
-using ColorPalettes.Services;
+﻿using ColorPalettes.Services;
 
 namespace ColorPalettes.Colors
 {
@@ -21,7 +20,7 @@ namespace ColorPalettes.Colors
         public double Brightness { get; private set; }
     }
 
-    public class ArcLengthCalculator
+    public class ArcLengthCalculator : IArcLengthCalculator
     {
         private readonly ILuvDistanceCalculator _distanceCalculator;
         private readonly IVectorToLuvConverter _vectorToLuvConverter;
