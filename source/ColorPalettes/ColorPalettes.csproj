@@ -56,6 +56,8 @@
     <Compile Include="Colors\RgbModel.cs" />
     <Compile Include="Math\Vector3.cs" />
     <Compile Include="Colors\Xyz.cs" />
+    <Compile Include="Services\IVectorToLuvConverter.cs" />
+    <Compile Include="Services\VectorToLuvConverter.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

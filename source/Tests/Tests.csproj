@@ -64,6 +64,7 @@
     <Compile Include="SegmentProviderTests.cs" />
     <Compile Include="SegmentTests.cs" />
     <Compile Include="Vector3Tests.cs" />
+    <Compile Include="VectorToLuvConverterTests.cs" />
     <Compile Include="XyzTests.cs" />
   </ItemGroup>
   <ItemGroup>
