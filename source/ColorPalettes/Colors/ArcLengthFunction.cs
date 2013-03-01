@@ -24,7 +24,7 @@
                 var c0 = new Luv(v0.X, v0.Y, v0.Z);
                 var c1 = new Luv(v1.X, v1.Y, v1.Z);
 
-                var distance = _distanceCalculator.CalculateDifference(c0, c1);
+                var distance = _distanceCalculator.CalculateDistance(c0, c1);
                 sum += distance;
             }
 

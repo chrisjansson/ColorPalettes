@@ -22,7 +22,7 @@ namespace Tests
             var c0 = new Luv(50, 0, 0);
             var c1 = new Luv(20, 0, 0);
 
-            var difference = _calculator.CalculateDifference(c0, c1);
+            var difference = _calculator.CalculateDistance(c0, c1);
 
             var expectedResult = Math.Log(105.0 / 75.0);
             difference.Should().BeApproximately(expectedResult);
@@ -34,7 +34,7 @@ namespace Tests
             var c0 = new Luv(20, 0, 0);
             var c1 = new Luv(50, 0, 0);
 
-            var difference = _calculator.CalculateDifference(c0, c1);
+            var difference = _calculator.CalculateDistance(c0, c1);
 
             var expectedResult = -Math.Log(75.0 / 105.0);
             difference.Should().BeApproximately(expectedResult);
