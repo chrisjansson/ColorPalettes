@@ -68,9 +68,9 @@ namespace Tests
 
     public static class FluentAssertionExtensions
     {
-        public static void BeApproximately(this NumericAssertions<double> assertions, double expectedValue)
+        public static void BeApproximately(this NumericAssertions<double> assertions, double expectedValue, string reason = null)
         {
-            assertions.BeApproximately(expectedValue, 0.00001);
+            assertions.BeApproximately(expectedValue, 0.00001, reason);
         }
     }
 }
