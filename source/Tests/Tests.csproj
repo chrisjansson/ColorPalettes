@@ -53,6 +53,7 @@
     <Compile Include="ArcLengthCalculatorTests.cs" />
     <Compile Include="CubicBezierCurveTests.cs" />
     <Compile Include="DistanceCalculatorTests.cs" />
+    <Compile Include="NormalizedArcLengthApproximatorTests.cs" />
     <Compile Include="SequentialBezierCurveTests.cs" />
     <Compile Include="QuadraticBezierCurveTests.cs" />
     <Compile Include="ColorConverterTests.cs" />
