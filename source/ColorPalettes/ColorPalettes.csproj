@@ -45,6 +45,7 @@
     <Compile Include="Colors\DistanceCalculator.cs" />
     <Compile Include="Colors\IArcLengthCalculator.cs" />
     <Compile Include="Colors\IBezierCurve.cs" />
+    <Compile Include="Colors\IInverseArcLengthFunction.cs" />
     <Compile Include="Colors\IInverseArcLengthFunctionWeight.cs" />
     <Compile Include="Colors\INormalizedArcLengthApproximator.cs" />
     <Compile Include="Colors\InverseArcLengthFunction.cs" />
