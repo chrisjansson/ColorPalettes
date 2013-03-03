@@ -1,10 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows;
 using System.Windows.Media;
 using ColorPalettes.Colors;
 using Gui.Annotations;
+using System.Linq;
 
 namespace Gui
 {
@@ -22,7 +23,7 @@ namespace Gui
 
     public class PaletteGenerationViewModel : ViewModelBase
     {
-        private IList<ColorViewModel> _colors;
+
 
         public PaletteGenerationViewModel()
         {
@@ -43,34 +44,44 @@ namespace Gui
         private void OnParametersViewModelChanged()
         {
             var calculationParameters = Parameters.GatherParameters();
+            var linearGradientBrush = GeneratePalette(calculationParameters);
 
+
+            Colors = linearGradientBrush;
+        }
+
+        private LinearGradientBrush GeneratePalette(CalculationParameters calculationParameters)
+        {
             var paletteGenerator = new PaletteGenerator();
-            var palette = paletteGenerator.GeneratePalette(calculationParameters);
+            var palette = paletteGenerator.GeneratePalette(calculationParameters)
+                .ToList();
 
-            var colorViewModels = new List<ColorViewModel>();
-            foreach (var vector3 in palette)
+            var gradientStopCollection = new GradientStopCollection();
+
+            var count = palette.Count();
+            for (var i = 0; i < count; i++)
             {
+                var vector3 = palette[i];
                 var color = Color.FromRgb(ToColorByte(vector3.X), ToColorByte(vector3.Y), ToColorByte(vector3.Z));
 
-                var colorViewModel = new ColorViewModel
-                    {
-                        Brush = new SolidColorBrush(color)
-                    };
-
-                colorViewModels.Add(colorViewModel);
+                var startOffset = i * (1.0 / count);
+                var endOffset = (i + 1) * (1.0 / count);
+                gradientStopCollection.Add(new GradientStop(color, startOffset));
+                gradientStopCollection.Add(new GradientStop(color, endOffset));
             }
 
-            Colors = colorViewModels;
+            return new LinearGradientBrush(gradientStopCollection, new Point(0, 0), new Point(0, 1));
         }
-        
+
         private byte ToColorByte(double component)
         {
             var max = Math.Min(1.0, component);
 
-            return (byte) (max*255);
+            return (byte)(max * 255);
         }
 
-        public IList<ColorViewModel> Colors
+        private LinearGradientBrush _colors;
+        public LinearGradientBrush Colors
         {
             get { return _colors; }
             set
