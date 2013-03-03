@@ -1,6 +1,8 @@
-﻿namespace ColorPalettes.Math
+﻿using ColorPalettes.Colors;
+
+namespace ColorPalettes.Math
 {
-    public class BezierCurve
+    public class BezierCurve : IBezierCurve
     {
         private readonly Vector3[] _points;
 

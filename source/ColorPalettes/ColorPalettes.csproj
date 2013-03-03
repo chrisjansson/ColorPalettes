@@ -54,6 +54,7 @@
     <Compile Include="Colors\Luv.cs" />
     <Compile Include="Colors\MostSaturatedColorCalculator.cs" />
     <Compile Include="Colors\NormalizedArcLengthApproximator.cs" />
+    <Compile Include="Colors\PaletteGenerator.cs" />
     <Compile Include="Colors\Segment.cs" />
     <Compile Include="Colors\SegmentProvider.cs" />
     <Compile Include="Colors\WhitePoints.cs" />
