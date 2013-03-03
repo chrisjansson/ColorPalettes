@@ -29,6 +29,7 @@ namespace Gui
             Parameters = new ParametersViewModel
                 {
                     NumberOfColors = 10,
+                    Contrast = 0.88,
                     Saturation = 0.6,
                     Brightness = 0.75
                 };
@@ -90,7 +91,6 @@ namespace Gui
             {
                 _hue = value;
                 OnPropertyChanged();
-                OnParameterChanged();
             }
         }
 
@@ -102,7 +102,6 @@ namespace Gui
             {
                 _saturation = value;
                 OnPropertyChanged();
-                OnParameterChanged();
             }
         }
 
@@ -114,11 +113,12 @@ namespace Gui
             {
                 _brightness = value;
                 OnPropertyChanged();
-                OnParameterChanged();
             }
         }
 
         private double _contrast;
+        private int _numberOfColors;
+
         public double Contrast
         {
             get { return _contrast; }
@@ -126,15 +126,18 @@ namespace Gui
             {
                 _contrast = value;
                 OnPropertyChanged();
-                OnParameterChanged();
             }
         }
 
-        public int NumberOfColors { get; set; }
-
-        private void OnParameterChanged()
+        public int NumberOfColors
         {
-            //Contrast = Math.Min(0.88, 0.34 + 0.06*NumberOfColors);
+            get { return _numberOfColors; }
+            set
+            {
+                if (value == _numberOfColors) return;
+                _numberOfColors = value;
+                OnPropertyChanged();
+            }
         }
 
         public CalculationParameters GatherParameters()

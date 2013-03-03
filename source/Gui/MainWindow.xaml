@@ -13,6 +13,13 @@
         </Grid.ColumnDefinitions>
         <StackPanel>
             <gui:SliderUserControl 
+                Text="Number of colors:"
+                Value="{Binding Parameters.NumberOfColors, Mode=TwoWay}"
+                Minimum="3"
+                Maximum="30"
+                Interval="1"/>
+            
+            <gui:SliderUserControl 
                 Text="Hue:"
                 Value="{Binding Parameters.Hue, Mode=TwoWay}"
                 Minimum="0"
