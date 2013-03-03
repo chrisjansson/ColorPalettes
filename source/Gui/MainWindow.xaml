@@ -1,9 +1,53 @@
 ﻿<Window x:Class="Gui.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:gui="clr-namespace:Gui"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        <ItemsControl x:Name="items" Width="30">
+        Title="MainWindow" Height="350" Width="525"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance gui:PaletteGenerationViewModel}">
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <StackPanel>
+            <gui:SliderUserControl 
+                Text="Hue:"
+                Value="{Binding Parameters.Hue, Mode=TwoWay}"
+                Minimum="0"
+                Maximum="360"
+                Interval="1"/>
+
+            <gui:SliderUserControl 
+                Text="Saturation:"
+                Value="{Binding Parameters.Saturation, Mode=TwoWay}"
+                Minimum="0"
+                Maximum="1"
+                Interval="0.01"/>
+
+            <gui:SliderUserControl 
+                Text="Brightness:"
+                Value="{Binding Parameters.Brightness, Mode=TwoWay}"
+                Minimum="0"
+                Maximum="1"
+                Interval="0.01"/>
+
+            <gui:SliderUserControl 
+                Text="Contrast:"
+                Value="{Binding Parameters.Contrast, Mode=TwoWay}"
+                Minimum="0"
+                Maximum="1"
+                Interval="0.01"/>
+
+            <!--<StackPanel Orientation="Horizontal">
+                <TextBlock Text="Contrast: "/>
+                <TextBlock Text="{Binding Parameters.Contrast}" />
+            </StackPanel>-->
+        </StackPanel>
+
+        
+        <ItemsControl ItemsSource="{Binding Colors}" Width="30" Grid.Column="1">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <UniformGrid Columns="1" />
