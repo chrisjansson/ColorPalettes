@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ColorPalettes", "ColorPalet
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{53FBD6F2-1ABE-46FA-A9A5-0EDE27CDA34F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gui", "Gui\Gui.csproj", "{47337B5A-E367-4DB7-9DB5-E283B825E9AD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,10 @@ Global
 		{53FBD6F2-1ABE-46FA-A9A5-0EDE27CDA34F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{53FBD6F2-1ABE-46FA-A9A5-0EDE27CDA34F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{53FBD6F2-1ABE-46FA-A9A5-0EDE27CDA34F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47337B5A-E367-4DB7-9DB5-E283B825E9AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47337B5A-E367-4DB7-9DB5-E283B825E9AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47337B5A-E367-4DB7-9DB5-E283B825E9AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47337B5A-E367-4DB7-9DB5-E283B825E9AD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

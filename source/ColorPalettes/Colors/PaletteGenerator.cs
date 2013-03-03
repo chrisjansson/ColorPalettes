@@ -17,7 +17,7 @@ namespace ColorPalettes.Colors
         {
             _mostSaturatedColorCalculator = new MostSaturatedColorCalculator();
             _colorConverter = new ColorConverter();
-            
+
             var distanceCalculator = new DistanceCalculator();
             var vectorToLuvConverter = new VectorToLuvConverter();
             var arcLengthCalculator = new ArcLengthCalculator(distanceCalculator, vectorToLuvConverter);
@@ -32,16 +32,22 @@ namespace ColorPalettes.Colors
 
             _curve = CreateCurve();
 
-            for (double i = 0; i <= 1; i+=0.1)
+            var colors = new List<Vector3>();
+            for (var i = 0; i < _parameters.NumberOfColors; i++)
             {
-                var t = (1 - _parameters.Contrast)*_parameters.Brightness + i*_parameters.Contrast;
-                yield return GetColor(t);
+                var fraction = i*(1.0 / (_parameters.NumberOfColors - 1));
+
+                var t = (1 - _parameters.Contrast) * _parameters.Brightness + fraction * _parameters.Contrast;
+                var color = GetColor(t);
+                colors.Add(color); 
             }
+
+            return colors;
         }
 
         private Vector3 GetColor(double t)
         {
-            var u = _inverseArcLengthFunction.Calculate(t, 11, 10, _curve);
+            var u = _inverseArcLengthFunction.Calculate(t, _parameters.NumberOfColors, _parameters.NumberOfColors, _curve);
             var lchVec = _curve.Calculate(u);
 
             var lch = new Lchuv(lchVec.X, lchVec.Y, lchVec.Z);
@@ -64,7 +70,7 @@ namespace ColorPalettes.Colors
 
             var q0 = p0 * (1 - _parameters.Saturation) + p1 * _parameters.Saturation;
             var q2 = p2 * (1 - _parameters.Saturation) + p1 * _parameters.Saturation;
-            var q1 = (q0 + q2)*0.5;
+            var q1 = (q0 + q2) * 0.5;
 
             var b0 = new BezierCurve(p0, q0, q1);
             var b1 = new BezierCurve(q1, q2, p2);
