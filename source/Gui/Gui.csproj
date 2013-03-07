@@ -53,6 +53,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ParametersViewModel.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="SliderUserControl.xaml.cs">
       <DependentUpon>SliderUserControl.xaml</DependentUpon>

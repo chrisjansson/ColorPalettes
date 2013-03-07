@@ -3,7 +3,6 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Media;
-using ColorPalettes.Colors;
 using ColorPalettes.PaletteGeneration;
 using Gui.Annotations;
 using System.Linq;
@@ -24,8 +23,6 @@ namespace Gui
 
     public class PaletteGenerationViewModel : ViewModelBase
     {
-
-
         public PaletteGenerationViewModel()
         {
             Parameters = new ParametersViewModel
@@ -53,7 +50,9 @@ namespace Gui
 
         private LinearGradientBrush GeneratePalette(CalculationParameters calculationParameters)
         {
-            var paletteGenerator = new PaletteGenerator();
+            var paletteGeneratorFactory = new PaletteGeneratorFactory();
+            var paletteGenerator = paletteGeneratorFactory.CreatePaletteGenerator();
+
             var palette = paletteGenerator.GeneratePalette(calculationParameters)
                 .ToList();
 
@@ -90,71 +89,6 @@ namespace Gui
                 _colors = value;
                 OnPropertyChanged();
             }
-        }
-    }
-
-    public class ParametersViewModel : ViewModelBase
-    {
-        private double _hue;
-        public double Hue
-        {
-            get { return _hue; }
-            set
-            {
-                _hue = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private double _saturation;
-        public double Saturation
-        {
-            get { return _saturation; }
-            set
-            {
-                _saturation = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private double _brightness;
-        public double Brightness
-        {
-            get { return _brightness; }
-            set
-            {
-                _brightness = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private double _contrast;
-        private int _numberOfColors;
-
-        public double Contrast
-        {
-            get { return _contrast; }
-            set
-            {
-                _contrast = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public int NumberOfColors
-        {
-            get { return _numberOfColors; }
-            set
-            {
-                if (value == _numberOfColors) return;
-                _numberOfColors = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public CalculationParameters GatherParameters()
-        {
-            return new CalculationParameters(NumberOfColors, Hue % 360.0, Contrast, Saturation, Brightness);
         }
     }
 }

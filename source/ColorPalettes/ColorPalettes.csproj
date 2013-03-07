@@ -39,14 +39,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Colors\Lchuv.cs" />
+    <Compile Include="PaletteGeneration\ArcLengthCalculator.cs" />
     <Compile Include="PaletteGeneration\ArcLengthFunction.cs" />
     <Compile Include="PaletteGeneration\CalculationParameters.cs" />
     <Compile Include="Colors\ColorConverter.cs" />
     <Compile Include="PaletteGeneration\DistanceCalculator.cs" />
     <Compile Include="PaletteGeneration\IArcLengthCalculator.cs" />
     <Compile Include="Math\IBezierCurve.cs" />
+    <Compile Include="Colors\IColorConverter.cs" />
     <Compile Include="PaletteGeneration\IInverseArcLengthFunction.cs" />
     <Compile Include="PaletteGeneration\IInverseArcLengthFunctionWeight.cs" />
+    <Compile Include="PaletteGeneration\IMostSaturatedColorCalculator.cs" />
     <Compile Include="PaletteGeneration\INormalizedArcLengthApproximator.cs" />
     <Compile Include="PaletteGeneration\InverseArcLengthFunction.cs" />
     <Compile Include="PaletteGeneration\InverseArcLengthFunctionWeight.cs" />
@@ -55,6 +59,7 @@
     <Compile Include="PaletteGeneration\MostSaturatedColorCalculator.cs" />
     <Compile Include="PaletteGeneration\NormalizedArcLengthApproximator.cs" />
     <Compile Include="PaletteGeneration\PaletteGenerator.cs" />
+    <Compile Include="PaletteGeneration\PaletteGeneratorFactory.cs" />
     <Compile Include="PaletteGeneration\Segment.cs" />
     <Compile Include="PaletteGeneration\SegmentProvider.cs" />
     <Compile Include="Colors\WhitePoints.cs" />

@@ -3,7 +3,7 @@ using ColorPalettes.Math;
 
 namespace ColorPalettes.PaletteGeneration
 {
-    public class MostSaturatedColorCalculator
+    public class MostSaturatedColorCalculator : IMostSaturatedColorCalculator
     {
         private RgbModel _rgbModel;
         private double _hue;
