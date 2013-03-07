@@ -58,6 +58,7 @@
     <Compile Include="SliderUserControl.xaml.cs">
       <DependentUpon>SliderUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModelBase.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

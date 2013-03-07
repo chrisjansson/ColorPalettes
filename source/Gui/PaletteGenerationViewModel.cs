@@ -1,31 +1,16 @@
 ﻿using System;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Media;
 using ColorPalettes.PaletteGeneration;
-using Gui.Annotations;
 using System.Linq;
 
 namespace Gui
 {
-    public class ViewModelBase : INotifyPropertyChanged
-    {
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            var handler = PropertyChanged;
-            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
-        }
-    }
-
     public class PaletteGenerationViewModel : ViewModelBase
     {
         public PaletteGenerationViewModel()
         {
-            Parameters = new ParametersViewModel
+            ParametersViewModel = new ParametersViewModel
                 {
                     NumberOfColors = 10,
                     Contrast = 0.88,
@@ -33,15 +18,15 @@ namespace Gui
                     Brightness = 0.75
                 };
 
-            Parameters.PropertyChanged += (sender, args) => OnParametersViewModelChanged();
+            ParametersViewModel.PropertyChanged += (sender, args) => OnParametersViewModelChanged();
             OnParametersViewModelChanged();
         }
 
-        public ParametersViewModel Parameters { get; set; }
+        public ParametersViewModel ParametersViewModel { get; set; }
 
         private void OnParametersViewModelChanged()
         {
-            var calculationParameters = Parameters.GatherParameters();
+            var calculationParameters = ParametersViewModel.GatherParameters();
             var linearGradientBrush = GeneratePalette(calculationParameters);
 
 

@@ -14,35 +14,35 @@
         <StackPanel>
             <gui:SliderUserControl 
                 Text="Number of colors:"
-                Value="{Binding Parameters.NumberOfColors, Mode=TwoWay}"
+                Value="{Binding ParametersViewModel.NumberOfColors, Mode=TwoWay}"
                 Minimum="3"
                 Maximum="30"
                 Interval="1"/>
             
             <gui:SliderUserControl 
                 Text="Hue:"
-                Value="{Binding Parameters.Hue, Mode=TwoWay}"
+                Value="{Binding ParametersViewModel.Hue, Mode=TwoWay}"
                 Minimum="0"
                 Maximum="360"
                 Interval="1"/>
 
             <gui:SliderUserControl 
                 Text="Saturation:"
-                Value="{Binding Parameters.Saturation, Mode=TwoWay}"
+                Value="{Binding ParametersViewModel.Saturation, Mode=TwoWay}"
                 Minimum="0"
                 Maximum="1"
                 Interval="0.01"/>
 
             <gui:SliderUserControl 
                 Text="Brightness:"
-                Value="{Binding Parameters.Brightness, Mode=TwoWay}"
+                Value="{Binding ParametersViewModel.Brightness, Mode=TwoWay}"
                 Minimum="0"
                 Maximum="1"
                 Interval="0.01"/>
 
             <gui:SliderUserControl 
                 Text="Contrast:"
-                Value="{Binding Parameters.Contrast, Mode=TwoWay}"
+                Value="{Binding ParametersViewModel.Contrast, Mode=TwoWay}"
                 Minimum="0"
                 Maximum="1"
                 Interval="0.01"/>

@@ -5,8 +5,6 @@
         public MainWindow()
         {
             InitializeComponent();
-
-            DataContext = new PaletteGenerationViewModel();
         }
     }
 }
