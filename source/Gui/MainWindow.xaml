@@ -46,25 +46,10 @@
                 Minimum="0"
                 Maximum="1"
                 Interval="0.01"/>
-
-            <!--<StackPanel Orientation="Horizontal">
-                <TextBlock Text="Contrast: "/>
-                <TextBlock Text="{Binding Parameters.Contrast}" />
-            </StackPanel>-->
         </StackPanel>
 
         <Rectangle Fill="{Binding Colors}" Width="30" Grid.Column="1"/>
-        <!--<ItemsControl ItemsSource="{Binding Colors}" Width="30" Grid.Column="1">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <UniformGrid Columns="1" />
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemTemplate>
-                <DataTemplate DataType="{x:Type gui:ColorViewModel}">
-                    <Rectangle Fill="{Binding Brush}"/>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>-->
+
+
     </Grid>
 </Window>
