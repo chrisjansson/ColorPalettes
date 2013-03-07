@@ -1,4 +1,4 @@
-﻿namespace ColorPalettes.Colors
+﻿namespace ColorPalettes.PaletteGeneration
 {
     public interface IInverseArcLengthFunctionWeight
     {

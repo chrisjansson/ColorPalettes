@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+using ColorPalettes.Colors;
 using ColorPalettes.Math;
 using ColorPalettes.Services;
 
-namespace ColorPalettes.Colors
+namespace ColorPalettes.PaletteGeneration
 {
     public class PaletteGenerator
     {

@@ -1,4 +1,5 @@
 ﻿using ColorPalettes.Colors;
+using ColorPalettes.PaletteGeneration;
 using NUnit.Framework;
 using FluentAssertions;
 

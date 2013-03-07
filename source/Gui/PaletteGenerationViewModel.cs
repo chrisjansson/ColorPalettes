@@ -4,6 +4,7 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Media;
 using ColorPalettes.Colors;
+using ColorPalettes.PaletteGeneration;
 using Gui.Annotations;
 using System.Linq;
 

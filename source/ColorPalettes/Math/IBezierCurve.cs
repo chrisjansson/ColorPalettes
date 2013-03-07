@@ -1,6 +1,4 @@
-﻿using ColorPalettes.Math;
-
-namespace ColorPalettes.Colors
+﻿namespace ColorPalettes.Math
 {
     public interface IBezierCurve   
     {

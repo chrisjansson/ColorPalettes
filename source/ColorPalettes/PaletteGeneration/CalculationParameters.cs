@@ -1,6 +1,7 @@
-﻿using ColorPalettes.Services;
+﻿using ColorPalettes.Math;
+using ColorPalettes.Services;
 
-namespace ColorPalettes.Colors
+namespace ColorPalettes.PaletteGeneration
 {
     public class CalculationParameters
     {

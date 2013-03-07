@@ -1,4 +1,6 @@
-﻿namespace ColorPalettes.Colors
+﻿using ColorPalettes.Math;
+
+namespace ColorPalettes.PaletteGeneration
 {
     public interface IInverseArcLengthFunction
     {

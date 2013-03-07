@@ -1,6 +1,7 @@
-﻿using ColorPalettes.Math;
+﻿using ColorPalettes.Colors;
+using ColorPalettes.Math;
 
-namespace ColorPalettes.Colors
+namespace ColorPalettes.PaletteGeneration
 {
     public class MostSaturatedColorCalculator
     {

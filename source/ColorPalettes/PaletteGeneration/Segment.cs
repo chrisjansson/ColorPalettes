@@ -1,6 +1,6 @@
 ﻿using ColorPalettes.Math;
 
-namespace ColorPalettes.Colors
+namespace ColorPalettes.PaletteGeneration
 {
     public class Segment
     {

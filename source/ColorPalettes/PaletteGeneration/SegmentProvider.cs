@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using ColorPalettes.Math;
 using System.Linq;
+using ColorPalettes.Colors;
+using ColorPalettes.Math;
 
-namespace ColorPalettes.Colors
+namespace ColorPalettes.PaletteGeneration
 {
     public class SegmentProvider : ISegmentProvider
     {

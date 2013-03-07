@@ -1,4 +1,6 @@
-﻿namespace ColorPalettes.Colors
+﻿using ColorPalettes.Colors;
+
+namespace ColorPalettes.PaletteGeneration
 {
     public interface ILuvDistanceCalculator
     {

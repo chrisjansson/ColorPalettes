@@ -1,4 +1,5 @@
 ﻿using ColorPalettes.Colors;
+using ColorPalettes.PaletteGeneration;
 using FluentAssertions;
 using NUnit.Framework;
 
@@ -71,7 +72,7 @@ namespace Tests
             AssertColor(1.0, 0.0, 0.5, segment);
         }
 
-        private void AssertColor(double r, double g, double b, ColorPalettes.Colors.Segment segment)
+        private void AssertColor(double r, double g, double b, Segment segment)
         {
             var color = segment.Assemble(0.5, 0.0, 1.0);
 
