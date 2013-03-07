@@ -9,7 +9,7 @@ namespace Gui
         {
             base.OnStartup(e);
 
-            var mainWindow = new MainWindow()
+            var mainWindow = new MainWindow
                 {
                     DataContext = new PaletteGenerationViewModel()
                 };
